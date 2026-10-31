@@ -1,23 +1,25 @@
 #!/usr/bin/python3
-"""Query the Reddit API for the subscribers of a subreddit."""
+"""
+Module to query the Reddit API and return the number of subscribers
+for a given subreddit.
+"""
 import requests
 
 
 def number_of_subscribers(subreddit):
-    """Return the number of subscribers of a subreddit, or 0 if invalid."""
-    if not isinstance(subreddit, str) or not subreddit:
-        return 0
+    """
+    Queries the Reddit API and returns the total number of subscribers
+    for a given subreddit. Returns 0 if the subreddit is invalid.
+    """
     url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
-    headers = {"User-Agent": "linux:alu-scripting:v1.0 (by /u/alu_student)"}
-    try:
-        response = requests.get(
-            url, headers=headers, allow_redirects=False, timeout=10
-        )
-    except requests.RequestException:
-        return 0
-    if response.status_code != 200:
-        return 0
-    try:
-        return response.json().get("data", {}).get("subscribers", 0)
-    except ValueError:
-        return 0
+    headers = {'User-Agent': 'alu-scripting-agent/1.0'}
+
+    response = requests.get(url, headers=headers, allow_redirects=False)
+
+    if response.status_code == 200:
+        try:
+            data = response.json().get("data", {})
+            return data.get("subscribers", 0)
+        except ValueError:
+            return 0
+    return 0
