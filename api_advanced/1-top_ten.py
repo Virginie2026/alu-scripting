@@ -25,4 +25,4 @@ def top_ten(subreddit):
         except ValueError:
             print(None)
     else:
-            print(None)
+        print(None)
