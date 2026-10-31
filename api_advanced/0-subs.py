@@ -12,7 +12,7 @@ def number_of_subscribers(subreddit):
     for a given subreddit. Returns 0 if the subreddit is invalid.
     """
     url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
-    headers = {'User-Agent': 'alu-scripting-agent/1.0'}
+    headers = {"User-Agent": "linux:alu-scripting:v1.0.0 (by /u/sylvain)"}
 
     response = requests.get(url, headers=headers, allow_redirects=False)
 
