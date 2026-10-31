@@ -1,1 +1,1 @@
-# ALU Scripting
+This repository contains Python scripts designed to interact with the Reddit API, implementing concepts such as API querying, handling pagination recursively, custom User-Agents, parsing JSON data, and strictly adhering to PEP 8 style guidelines.
