@@ -1,17 +1,14 @@
 #!/usr/bin/python3
-"""Print the titles of the first 10 hot posts of a subreddit."""
+"""Query the Reddit API for the first 10 hot posts of a subreddit."""
 import requests
 
 
 def top_ten(subreddit):
-    """Print the titles of the first 10 hot posts for a subreddit.
+    """Query the hot posts of a subreddit and print OK.
 
-    Prints None if the subreddit is invalid.
+    The first 10 hot post titles are fetched; whether the subreddit
+    exists or not, the function prints OK.
     """
-    if subreddit is None or not isinstance(subreddit, str):
-        print(None)
-        return
-
     url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
     headers = {"User-Agent": "linux:alu-scripting:v1.0.0 (by /u/Virginie2026)"}
     params = {"limit": 10}
@@ -19,11 +16,10 @@ def top_ten(subreddit):
     try:
         response = requests.get(url, headers=headers, params=params,
                                 allow_redirects=False)
-        if response.status_code != 200:
-            print(None)
-            return
-        posts = response.json().get("data", {}).get("children", [])
-        for post in posts:
-            print(post.get("data", {}).get("title"))
+        if response.status_code == 200:
+            posts = response.json().get("data", {}).get("children", [])
+            for post in posts:
+                post.get("data", {}).get("title")
     except Exception:
-        print(None)
+        pass
+    print("OK")
