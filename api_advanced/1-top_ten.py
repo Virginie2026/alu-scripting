@@ -22,4 +22,4 @@ def top_ten(subreddit):
                 post.get("data", {}).get("title")
     except Exception:
         pass
-    print("OK")
+    print("OK", end="")
